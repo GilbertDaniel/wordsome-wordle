@@ -1,16 +1,25 @@
-import React, { useState, createContext } from 'react'
+import React, { useState, createContext, useEffect } from 'react'
 import './App.css'
 import Board from './components/Board'
 import Keyboard from './components/Keyboard'
-import { boardDefault } from './Words'
+import { boardDefault, generateWordSet } from './Words'
 
 export const AppContext = createContext()
 
 const App = () => {
   const [board, setBoard] = useState(boardDefault)
   const [currAttempt, setCurrAttempt] = useState({ attempt: 0, letterPos: 0 });
+  const [wordSet, setWordSet] = useState([]);
+  const [disabledLetters, setDisabledLetters] = useState([]);
+  const [correctWord, setCorrectWord] = useState("");
+  // const correctWord = "RIGHT"
 
-  const correctWord = "RIGHT"
+  useEffect(() => {
+    generateWordSet().then((words) => {
+      setWordSet(words.wordSet);
+      setCorrectWord(words.todaysWord);
+    });
+  }, []);
 
   const onSelectLetter = (keyVal) => {
     if (currAttempt.letterPos > 4) return
@@ -29,8 +38,20 @@ const App = () => {
   }
 
   const onEnter = () => {
-    if (currAttempt.letterPos !== 5) return
+    if (currAttempt.letterPos !== 5) return      
+
+    let currWord = "";
+    for (let i = 0; i < 5; i++) {
+      currWord += board[currAttempt.attempt][i];
+    }
+    
     setCurrAttempt({ attempt: currAttempt.attempt + 1, letterPos: 0 })
+
+    if (currWord === correctWord) {
+      
+    }
+
+    
   }
   return (
     <div className='App'>
@@ -45,6 +66,7 @@ const App = () => {
           onDelete,
           onEnter,
           correctWord,
+          disabledLetters, setDisabledLetters,
         }}
       >
         <div className='game'>

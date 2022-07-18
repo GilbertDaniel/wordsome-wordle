@@ -12,6 +12,7 @@ const Keyboard = () => {
     onSelectLetter,
     onEnter,
     onDelete,
+    disabledLetters,
   } = useContext(AppContext);
 
   const handleKeyboard = useCallback(
@@ -54,7 +55,7 @@ const Keyboard = () => {
         {
           keys1.map((key) =>{
             return (
-              <Key keyVal={key}/>
+              <Key keyVal={key} disabled={disabledLetters.includes(key)}/>
             )
           })
         }
@@ -63,7 +64,7 @@ const Keyboard = () => {
       {
           keys2.map((key) =>{
             return (
-              <Key keyVal={key}/>
+              <Key keyVal={key} disabled={disabledLetters.includes(key)}/>
             )
           })
         }
@@ -73,7 +74,7 @@ const Keyboard = () => {
       {
           keys3.map((key) =>{
             return (
-              <Key keyVal={key}/>
+              <Key keyVal={key} disabled={disabledLetters.includes(key)}/>
             )
           })
         }
