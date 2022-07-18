@@ -53,18 +53,18 @@ const Keyboard = () => {
     <div className='keyboard' onKeyDown={handleKeyboard}>
       <div className='line1'>
         {
-          keys1.map((key) =>{
+          keys1.map((key,i) =>{
             return (
-              <Key keyVal={key} disabled={disabledLetters.includes(key)}/>
+              <Key key={i} keyVal={key} disabled={disabledLetters.includes(key)}/>
             )
           })
         }
       </div>
       <div className='line2'>      
       {
-          keys2.map((key) =>{
+          keys2.map((key, i) =>{
             return (
-              <Key keyVal={key} disabled={disabledLetters.includes(key)}/>
+              <Key key={i} keyVal={key} disabled={disabledLetters.includes(key)}/>
             )
           })
         }
@@ -72,9 +72,9 @@ const Keyboard = () => {
       <div className='line3'>
       <Key keyVal={"ENTER"} bigKey/>
       {
-          keys3.map((key) =>{
+          keys3.map((key, i) =>{
             return (
-              <Key keyVal={key} disabled={disabledLetters.includes(key)}/>
+              <Key key={i} keyVal={key} disabled={disabledLetters.includes(key)}/>
             )
           })
         }
